@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Form_Register';
+$route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -63,7 +63,7 @@ $route['master/company/detail/:num'] = 'Master/detail_company';
 $route['master/buy'] = 'Master/buy';
 $route['product'] = 'Home/product';
 $route['product/add'] = 'Home/product_add';
-$route['product/delete'] = 'Home/delete_product';
+
 $route['history'] = 'Transaction/history';
 $route['transaction/detail/:num'] = 'Transaction/detail';
 $route['form-register'] = 'Form_Register';
@@ -75,6 +75,8 @@ $route['api/transaction/status'] = 'Transaction/update_status';
 
 // API USER
 $route['api/product/add/myproduct'] = 'Home/add_product';
+$route['api/product/delete/:num'] = 'Home/delete_product';
+$route['product/detail/:num'] = 'Home/detail_product';
 
 
 // Institution Master Endpoint
@@ -114,3 +116,6 @@ $route['api/master/add/job'] = 'Master/add_job';
 $route['api/master/get/job/:num'] = 'Master/get_job';
 $route['api/master/update/job'] = 'Master/update_job';
 $route['api/master/delete/job/:num'] = 'Master/delete_job';
+
+
+$route['master/participant'] = 'Form_Register/participant';

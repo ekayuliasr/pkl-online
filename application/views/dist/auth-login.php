@@ -50,9 +50,9 @@ $this->load->view('dist/_partials/header');
                 </form>
               </div>
             </div>
-            <div class="mt-5 text-muted text-center">
+            <!-- <div class="mt-5 text-muted text-center">
               Belum punya akun? <a href="<?php echo base_url(); ?>auth/register">Mendaftar</a>
-            </div>
+            </div> -->
             <div class="simple-footer">
               Copyright &copy; Stisla 2018
             </div>

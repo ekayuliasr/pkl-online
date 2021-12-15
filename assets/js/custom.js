@@ -165,3 +165,44 @@ $("#products-carousel").owlCarousel({
         }
       })
 }
+
+
+function deleteProductUser(id) {
+   
+    if (confirm('Ingin menghapus produk')) {
+   
+     $.ajax({
+            type : "GET",
+            dataType: "JSON",
+            url: _baseUrl + "product/delete/" + id,
+            success: function (response) {
+                if (response.status) {
+                    window.location.reload()
+                } else {
+                    alert(response.message)
+                }
+            }
+        });
+    }  
+
+}
+
+function detailProductUser(id) {
+   
+    if (confirm('Ingin menghapus produk')) {
+   
+     $.ajax({
+            type : "GET",
+            dataType: "JSON",
+            url: _baseUrl + "product/delete/" + id,
+            success: function (response) {
+                if (response.status) {
+                    window.location.reload()
+                } else {
+                    alert(response.message)
+                }
+            }
+        });
+    }  
+
+}

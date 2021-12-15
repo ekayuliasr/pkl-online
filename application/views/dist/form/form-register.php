@@ -151,7 +151,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <div class="col-md-6 mb-30">
                                         <div class="common-control d-flex flex-column">
                                             <label for="nama_lengkap">Nama Lengkap</label>
-                                            <input type="text" name="nama" placeholder="Nama Lengkap" required="">
+                                            <input type="text" name="name" placeholder="Nama Lengkap" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-30">
@@ -163,13 +163,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <div class="col-md-6 mb-30">
                                         <div class="common-control d-flex flex-column">
                                             <label for="no_hp">Kontak</label>
-                                            <input type="number" name="no_hp" placeholder="Kontak (No. HP)" required="">
+                                            <input type="number" name="phone" placeholder="Kontak (No. HP)" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-30">
                                         <div class="common-control d-flex flex-column">
                                             <label for="asal_sekolah">Asal Sekolah/Universitas/Instansi</label>
-                                            <input type="text" name="asal_sekolah" placeholder="Asal Sekolah" required="">
+                                            <input type="text" name="institution" placeholder="Asal Sekolah" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-30">
@@ -194,22 +194,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <div class="col-md-12 mb-30">
                                         <label for="status">Tujuan / Orientasi</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tujuan" value="Praktik Kerja Industri (Kelas 1 & 2)">
+                                            <input class="form-check-input" type="radio" name="goal" value="Praktik Kerja Industri (Kelas 1 & 2)">
                                             <label class="form-check-label" for="tujuan1"> Praktik Kerja Industri (Kelas 1 & 2) </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tujuan" value="Magang Kerja (Mahasiswa)">
+                                            <input class="form-check-input" type="radio" name="goal" value="Magang Kerja (Mahasiswa)">
                                             <label class="form-check-label" for="tujuan2"> Magang Kerja (Mahasiswa) </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tujuan" value="Sertifikasi DM - LSP">
+                                            <input class="form-check-input" type="radio" name="goal" value="Sertifikasi DM - LSP">
                                             <label class="form-check-label" for="tujuan3"> Sertifikasi DM - LSP </label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-30">
                                         <div class="common-control">
                                             <label for="jadwal">Jadwal Pelaksanaan</label>
-                                            <input type="date" name="jadwal" placeholder="Jadwal Pelaksanaan" required="">
+                                            <input type="date" name="schedule" placeholder="Jadwal Pelaksanaan" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

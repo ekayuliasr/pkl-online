@@ -16,65 +16,43 @@ class Form_Register extends CI_Controller {
     }
 	
 	function register(){
-		$nama = $this->input->post('nama');
+		$name = $this->input->post('name');
 		$email = $this->input->post('email');
-		$no_hp = $this->input->post('no_hp');
+		$phone = $this->input->post('phone');
 		$status = $this->input->post('status');
-        $asal_sekolah = $this->input->post('asal_sekolah');
-        $tujuan = $this->input->post('tujuan');
-		$jadwal = $this->input->post('jadwal');
+        $institution = $this->input->post('institution');
+        $goal = $this->input->post('goal');
+		$schedule = $this->input->post('schedule');
  
 		$data = array(
-			'nama' => $nama,
-			'email' => $email,
-			'no_hp' => $no_hp,
-			'status' => $status,
-			'asal_sekolah' => $asal_sekolah,
-			'tujuan' => $tujuan,
-			'jadwal' => $jadwal
+			'FULLNAME' => $name,
+			'EMAIL' => $email,
+			'PHONE' => $phone,
+			'STATUS' => $status,
+			'INSTITUTION' => $institution,
+			'GOAL' => $goal,
+			'SCHEDULE' => $schedule
 			);
 		$this->Register->input_data($data,'register');
 		redirect('Form_Register/index');
 	}
+
+	public function participant()
+    {
+        // $participant =  $this->db->query("
+		// SELECT * FROM REGISTER")->row();
+        // $data = array(
+        //     'title' => "Master Data Participant",
+        //     'participant' => $participant,
+        // );
+		$data["title"] = "Peserta Sosialisasi";
+
+		$data["participant"] = $this->Register->getAll();
+        $this->load->view('dist/modules-participant', $data);
+		//json_encode($data);
+    }
  
-/*
-    public function register()
-	{
-		$nama = $this->input->post('nama');
-		$email = $this->input->post('email');
-		$no_hp = $this->input->post('no_hp');
-		$status = $this->input->post('status');
-        $asal_sekolah = $this->input->post('asal_sekolah');
-        $tujuan = $this->input->post('TUJUAN');
-		$jadwal = $this->input->post('JADWAL');
 
-		if ($email == '' || $nama == '' || $no_hp == '' || $status == '' || $asal_sekolah == '' || $tujuan == '' || $jadwal == '') {
-			$this->msg = array('status' => false, 'message' => 'Data registrasi masih kosong', 'data' => null);
-		} else {
-			if ($this->API->checkEmail($email)) {
-				$this->msg = array('status' => false, 'message' => 'Email sudah digunakan', 'data' => null);
-			} else {
-				$data = array(
-					'NAMA' => $nama,
-					'EMAIL' => $email, 
-					'NP_HP' => $no_hp,
-					'STATUS' => $status,
-					'ASAL_SEKOLAH' => $asal_sekolah,
-					'TUJUAN' => $tujuan,
-                    'JADWAL' => $jadwal,
-				);
-	
-				if ( $do = $this->Register->Register($data)) {
-					$this->msg = array('status' => true, 'message' => 'User created', 'data' => $data);
-				} else {
-					$this->msg = array('status' => false, 'message' => 'Internal server error', 'data' => null);
-				}
-			}
-			
-		}
-
-		echo json_encode($this->msg);
-	}*/
 }
 
 /* End of file Home.php */

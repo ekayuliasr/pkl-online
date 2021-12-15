@@ -57,7 +57,8 @@ $this->load->view('dist/_partials/header');
                             <div class="product-name"><?= $key->PRODUCT_NAME; ?></div>
                             <div class="text-muted text-small">Rp<?= number_format($key->PRODUCT_PRICE); ?></div>
                             <div class="product-cta">
-                              <a href="#" class="btn btn-primary">Pilih Produk</a>
+                              <button onclick="selectProduct(<?= $key->PRODUCT_ID; ?>, '<?= $key->PRODUCT_NAME; ?>')" class="btn btn-primary">Pilih Produk</button>
+                              <!-- <a href="#" class="btn btn-primary">Pilih Produk</a> -->
                             </div>
                           </div>  
                         </div>

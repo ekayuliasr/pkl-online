@@ -22,6 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php elseif ($this->session->userdata('admin')) : ?>
               <li class="menu-header">Admin Menu</li>
               <?php if ($this->session->userdata('data')->ADMIN_ROLE == 2) : ?>
+              <li class=><a class="nav-link" href="<?php echo base_url('master/participant'); ?>"><i class="fa fa-user"></i> <span>Peserta Sosialisasi</span></a></li>
                 <li class="<?php echo $this->uri->segment(2) == 'company' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url('master/company'); ?>"><i class="fa fa-hotel"></i> <span>Perusahaan</span></a></li>
               <?php endif; ?>
               <li class="<?php echo $this->uri->segment(2) == 'institution' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url('master/institution'); ?>"><i class="fa fa-university"></i> <span>Institusi Partner</span></a></li>
@@ -31,10 +32,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="<?php echo $this->uri->segment(2) == 'buy' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url('master/buy'); ?>"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
               <?php endif; ?>
               <li class="<?php echo $this->uri->segment(2) == 'history' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url('master/history'); ?>"><i class="fa fa-history"></i> <span>Riwayat</span></a></li>
+          
             <?php endif; ?>
           </ul>
 
-          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+          <div class="mt-2 mb-4 p-3 hide-sidebar-mini">
             <a href="<?php echo base_url(); ?>home/logout" class="btn btn-primary btn-lg btn-block btn-icon-split">
               <i class="fa fa-sign-out-alt"></i> Keluar
             </a>

@@ -22,7 +22,7 @@ $this->load->view('dist/_partials/header');
                   <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                     <article class="article">
                       <div class="article-header">
-                        <div class="article-image" data-background="<?= $key->IMAGE == null ? base_url().'assets/img/news/img07.jpg' : base_url().'upload/products/'.$key->PRODUCT_IMAGE; ?>">
+                        <div class="article-image" data-background="<?= $key->IMAGE == null ? base_url().'assets/img/news/img07.jpg' : base_url().'upload/products/'.$key->IMAGE->PRODUCT_IMAGE_NAME; ?>">
                         </div>
                         <div class="article-title">
                           <h2><a href="#"><?= $key->PRODUCT_NAME; ?></a></h2>

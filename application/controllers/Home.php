@@ -10,6 +10,7 @@ class Home extends CI_Controller {
             redirect('auth','refresh');
         }
         $this->load->model('API_Model', 'API');
+        $this->load->model('Home_Model', 'Home');
     }
     
     public function index()
@@ -80,7 +81,8 @@ class Home extends CI_Controller {
                 'products' => $products,
                 'isAvailable' => $user->COMPANY_ID != null ? true : false
             );
-            $this->load->view('dist/modules-product-user', $data);
+           //echo json_encode($data);
+           $this->load->view('dist/modules-product-user', $data);
         }
     }
 
@@ -141,12 +143,38 @@ class Home extends CI_Controller {
     public function delete_product()
     {
         $id = $this->uri->segment(5);
-        if ($id) {
-            $result = $this->API->delete(array('REFF_ID' => $id), 'USER_PRODUCT');
+        if (empty($id)) {
             echo json_encode(
-                array('status' => true, 'message' => 'Delete data product by id success', 'data' => $result)
+               array('status' => false, 'message' => 'Field id empty', 'data' => null)
             );
-        }
+        } else {
+            $result = $this->API->delete(array('id' => $id), 'USER_PRODUCT');
+            echo json_encode(
+               array('status' => true, 'message' => 'Delete data job by id success', 'data' => $result)
+            );
+        }       
+    }
+
+    public function detail_product()
+    {
+
+        $id = $this->uri->segment(3);
+        $product = $this->db->query("
+            SELECT * FROM USER_PRODUCT UP 
+            JOIN USER U ON UP.USER_ID = U.USER_ID
+            JOIN PRODUCT P ON UP.PRODUCT_ID = P.PRODUCT_ID 
+            JOIN PRODUCT_CATEGORY PC ON P.CATEGORY_ID = PC.CATEGORY_ID
+            JOIN PRODUCT_IMAGE PI ON P.PRODUCT_ID = PI.PRODUCT_ID 
+            WHERE id = $id ")->row();
+
+        $data = array(
+            'title' => $product->REFF_ID,
+            'product' => $product
+        );
+        $this->load->view('dist/modules-detail-product', $data);
+
+       // echo json_encode($product);
+       
     }
 
     public function logout()

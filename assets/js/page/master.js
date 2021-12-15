@@ -503,24 +503,3 @@ function deleteJob(id) {
         });
     }
 }
-
-function deleteProductSelect(id) {
-   
-   
-    if (confirm('Ingin menghapus produk')) {
-     $.ajax({
-            type: "GET",
-            dataType: "JSON",
-            url: _baseUrl + "home/delete/product/" + id,
-            success: function (response) {
-                if (response.status) {
-                    window.location.reload()
-                } else {
-                    alert(response.message)
-                }
-            }
-        });
-    }
-    
-
-}
