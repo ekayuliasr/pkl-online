@@ -62,7 +62,7 @@ class Form_Register extends CI_Controller {
 	public function delete($id)
     {
         $this->Register->deleteParticipant($id);
-		$this->load->view('dist/modules-participant');
+		redirect('master/participant');
     }
 	
 	

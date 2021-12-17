@@ -119,6 +119,6 @@ $route['api/master/delete/job/:num'] = 'Master/delete_job';
 
 
 $route['master/participant'] = 'Form_Register/participant';
-$route['master/participant/delete/(:num)'] = 'Form_Register/delete/$1';
+$route['master/participant/delete/(:any)'] = 'Form_Register/delete/$1';
 
 // $route['api/mahasiswa/delete/(:any)'] = 'MahasiswaController/deleteMahasiswa/$1';

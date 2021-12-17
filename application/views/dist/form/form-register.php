@@ -214,7 +214,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                     <div class="col-md-12">
                                         <div class="submit-btn">
-                                            <input type="submit"class="readon"></input>
+                                            <input type="submit"class="readon" onclick="ConfirmDialog()"></input>
                                         </div>
                                     </div>
                                 </div>
@@ -361,5 +361,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="<?php echo base_url(); ?>assets/landing-page/js/contact.form.js"></script>
         <!-- main js -->
         <script src="<?php echo base_url(); ?>assets/landing-page/js/main.js"></script>
+
+        <script type="text/javascript">
+      function ConfirmDialog() {
+        var x=confirm("Data Berhasil disimpan")
+        if (x) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    </script>
     </body>
 </html> 
