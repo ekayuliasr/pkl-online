@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Home';
+$route['default_controller'] = 'Form_register';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -75,7 +75,7 @@ $route['api/transaction/status'] = 'Transaction/update_status';
 
 // API USER
 $route['api/product/add/myproduct'] = 'Home/add_product';
-$route['api/product/delete/:num'] = 'Home/delete_product';
+$route['product/delete/(:num)'] = 'Home/delete_product/$1';
 $route['product/detail/:num'] = 'Home/detail_product';
 
 
@@ -119,3 +119,6 @@ $route['api/master/delete/job/:num'] = 'Master/delete_job';
 
 
 $route['master/participant'] = 'Form_Register/participant';
+$route['master/participant/delete/(:num)'] = 'Form_Register/delete/$1';
+
+// $route['api/mahasiswa/delete/(:any)'] = 'MahasiswaController/deleteMahasiswa/$1';

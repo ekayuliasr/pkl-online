@@ -217,6 +217,30 @@ class API_Model extends CI_Model {
 		return $query->result();
 	}
 
+	public function getTransaction($id)
+	{
+		$query = $this->db->query("SELECT * FROM TRANSACTION T 
+		JOIN PRODUCT P ON T.PRODUCT_ID = P.PRODUCT_ID 
+		JOIN PAYMENT PY ON T.PAYMENT_ID = PY.PAYMENT_ID
+		JOIN USER U ON T.USER_ID = U.USER_ID
+		WHERE T.USER_ID = $id
+		ORDER BY T.TRANSACTION_DATE ASC");
+		return $query->result();
+	}
+
+	public function getTransactionLimit($id)
+	{
+		$query = $this->db->query("SELECT * FROM TRANSACTION T 
+		JOIN PRODUCT P ON T.PRODUCT_ID = P.PRODUCT_ID 
+		JOIN PAYMENT PY ON T.PAYMENT_ID = PY.PAYMENT_ID
+		JOIN USER U ON T.USER_ID = U.USER_ID
+		WHERE T.USER_ID = $id
+		ORDER BY T.TRANSACTION_DATE DESC LIMIT 3");
+		return $query->result();
+	}
+
+
+
 	public function getJobsHome()
 	{
 		$query = $this->db->order_by('JOB_ID', 'DESC')->limit(5)->get('JOB');

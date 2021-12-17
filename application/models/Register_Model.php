@@ -19,6 +19,18 @@ class Register_Model extends CI_Model {
         return $query->result();
         
     }
+
+    public function deleteParticipant($id){
+        $this->db->where('REG_ID',$id);
+        $this->db->delete('register');
+        return true;
+   }
+
+    function total(){
+        $this->db->select('COUNT(*) as total');
+        $this->db->get('register');
+        return true;
+    }
 }
 
 

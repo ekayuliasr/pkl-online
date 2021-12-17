@@ -14,6 +14,24 @@ $this->load->view('dist/_partials/header');
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-icon shadow-primary bg-primary">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Total Peserta Sosialisasi</h4>
+                  </div>
+                  <div class="card-body">
+                  <?= $total; ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="section-body">
             <h2 class="section-title">Daftar Peserta 
               <!-- <button class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i>&nbsp; Tambah Institusi</button> -->
@@ -68,7 +86,9 @@ $this->load->view('dist/_partials/header');
                                 <?= $key->SCHEDULE ?>
                             </td>
                             <td>
-                            <a href="javascript:void(0)" class="btn btn-danger btn-sm delete-company" onclick="deleteInstitution(<?= $key->REG_ID; ?>)"><i class="fas fa-trash"></i></a>
+                            <!-- <?= base_url(); ?>transaction/detail/<?= $key->TRANSACTION_ID; ?> -->
+                            
+                            <a href="<?= base_url(); ?>master/participant/delete/<?= $key->REG_ID; ?>" value="<?= $key->REG_ID; ?>" class="btn btn-danger btn-sm delete-company" onclick="ConfirmDialog()"><i class="fas fa-trash"></i></a>
                             <a href="javascript:void(0)" class="btn btn-warning btn-sm edit-company" onclick="editInstitution(<?= $key->REG_ID; ?>)"><i class="fas fa-edit"></i></a>
                             </td>
                           </tr>
@@ -84,53 +104,6 @@ $this->load->view('dist/_partials/header');
         </section>
       </div>
 
-      <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Tambah Institusi Partner</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form id="add-institution">
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label>Nama Institusi</label>
-                    <input type="text" class="form-control" name="name">
-                  </div>
-                  <div class="form-group">
-                    <label>Alamat Institusi</label>
-                    <input type="text" class="form-control" name="address">
-                  </div>
-                  <div class="form-group">
-                    <h6>Detail Penanggungjawab</h6>
-                  </div>
-                  <div class="form-group">
-                    <label>Nama Penanggungjawab</label>
-                    <input type="text" class="form-control" name="admin_name">
-                  </div>
-                  <div class="form-group">
-                    <label>Email Penanggungjawab</label>
-                    <input type="text" class="form-control" name="admin_email">
-                  </div>
-                  <div class="form-group">
-                    <label>Nomor HP Penanggungjawab</label>
-                    <input type="text" class="form-control" name="admin_nohp">
-                  </div>
-                  <div class="form-group">
-                    <label>Password Penanggungjawab</label>
-                    <input type="password" class="form-control" name="admin_password">
-                  </div>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button type="submit" class="btn btn-primary">Tambah Data</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
         <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -180,4 +153,16 @@ $this->load->view('dist/_partials/header');
             </div>
           </div>
         </div>
+
+    <script type="text/javascript">
+      function ConfirmDialog() {
+        var x=confirm("Ingin menghapus Produk?")
+        if (x) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    </script>
+      
 <?php $this->load->view('dist/_partials/footer'); ?>

@@ -46,12 +46,26 @@ class Form_Register extends CI_Controller {
         //     'participant' => $participant,
         // );
 		$data["title"] = "Peserta Sosialisasi";
+		// $dt = $this->db->query("SELECT count(*) FROM register")->row();
+
+		// $data = array(
+		//   'dt' => $dt,
+		// );
+
+		$data["total"] = $this->Register->total();
 
 		$data["participant"] = $this->Register->getAll();
         $this->load->view('dist/modules-participant', $data);
 		//json_encode($data);
     }
- 
+
+	public function delete($id)
+    {
+        $this->Register->deleteParticipant($id);
+		$this->load->view('dist/modules-participant');
+    }
+	
+	
 
 }
 

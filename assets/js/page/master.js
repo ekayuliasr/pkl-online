@@ -76,7 +76,7 @@ function editInstitution(id) {
 
 function deleteInstitution(id) {
     
-    if (confirm('Ingin mengapus institusi')) {
+    if (confirm('Ingin menghapus institusi')) {
         $.ajax({
             type: "GET",
             dataType: "JSON",

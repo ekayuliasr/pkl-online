@@ -72,7 +72,7 @@ $this->load->view('dist/_partials/header');
                 <div class="card-header">
                   <h4>Transaksi</h4>
                   <div class="card-header-action">
-                    <a href="#" class="btn btn-danger">Lihat lainnya <i class="fas fa-chevron-right"></i></a>
+                    <a href="<?= base_url(); ?>history/" class="btn btn-danger">Lihat lainnya <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
                 <div class="card-body p-0">
@@ -85,9 +85,31 @@ $this->load->view('dist/_partials/header');
                         <th>Tanggal Pembayaran</th>
                         <th>Action</th>
                       </tr>
+                      <?php $no = 1; foreach ($transaction as $key): ?>     
                       <tr>
-                        <td colspan="5" style="text-align:center">Belum ada transaksi berlangsung</td>
+                        <td><?= $key->REFF_ID; ?></td>
+                        <td><?= $key->PRODUCT_NAME; ?></td>
+                        <td>
+                          <?php 
+                            if ($key->TRANSACTION_STATUS == 1) {
+                              echo 'Menunggu Pembayaran';
+                            } else if ($key->TRANSACTION_STATUS == 2) {
+                              echo 'Menunggu Konfirmasi';
+                            } else if ($key->TRANSACTION_STATUS == 3) {
+                              echo 'Menunggu Barang Diproses';
+                            } else if ($key->TRANSACTION_STATUS == 4) {
+                              echo 'Barang Dikirim';
+                            } else if ($key->TRANSACTION_STATUS == 5) {
+                              echo 'Transaksi Berhasil';
+                            } else {
+                              echo 'Transaksi Gagal';
+                            }
+                          ?>
+                        </td>
+                        <td><?= $key->TRANSACTION_DATE; ?></td>
+                        <td><a href="<?= base_url(); ?>transaction/detail/<?= $key->TRANSACTION_ID; ?>" class="btn btn-info btn-sm">Detail</a></td>
                       </tr>
+                      <?php $no++; endforeach; ?>
                     </table>
                   </div>
                 </div>

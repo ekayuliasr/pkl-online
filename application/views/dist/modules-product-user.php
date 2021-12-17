@@ -67,8 +67,8 @@ $this->load->view('dist/_partials/header');
                               <td>Rp<?= number_format($key->PRODUCT[0]->PRODUCT_PRICE); ?></td>
                               <td><?= $key->REFF_STATUS; ?></td>
                               <td>
-                              <a href="javascript:void(0)" class="btn btn-danger btn-sm delete-company" onclick="deleteProductUser(<?= $key->id; ?>)"><i class="fas fa-trash"></i></a>
-                              <a href="javascript:void(0)" class="btn btn-warning btn-sm edit-company" onclick="editProductSelect(<?= $key->REFF_ID; ?>)"><i class="fas fa-edit"></i></a>
+                              <a href="<?= base_url(); ?>product/delete/<?= $key->id; ?>" class="btn btn-danger btn-sm delete-company" onclick="ConfirmDialog()"><i class="fas fa-trash"></i></a>
+                              <!-- <a href="javascript:void(0)" class="btn btn-warning btn-sm edit-company" onclick="editProductSelect(<?= $key->REFF_ID; ?>)"><i class="fas fa-edit"></i></a> -->
                               <a href="<?= base_url(); ?>product/detail/<?= $key->id; ?>" class="btn btn-info btn-sm edit-company"><i class="fas fa-info"></i></a>
                               </td>
                             </tr>
@@ -90,5 +90,17 @@ $this->load->view('dist/_partials/header');
           </div>
         </section>
       </div>
+
+      <script type="text/javascript">
+        function ConfirmDialog() {
+        var x=confirm("Ingin menghapus Produk?")
+        if (x) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    </script>
+      
       
 <?php $this->load->view('dist/_partials/footer'); ?>

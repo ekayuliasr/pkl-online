@@ -22,6 +22,7 @@ class Home extends CI_Controller {
                 $totalCompany = $this->API->getCompanyRow();
                 $totalProduct = $this->API->getProductRow();
                 $totalSelling = $this->API->getSellingRow();
+                $totalParticipant = $this->Home->total();
             } else {
                 $totalUser = $this->API->getUserRow($this->session->userdata('data')->ADMIN_INSTITUTION);
                 $totalCompany = $this->API->getCompanyRow();
@@ -35,12 +36,14 @@ class Home extends CI_Controller {
                 'total_company' => $totalCompany,
                 'total_product' => $totalProduct,
                 'total_selling' => $totalSelling,
+                'total_participant' => $totalParticipant,
             );
             $this->load->view('dist/index-admin', $data);
         } else {
             $totalProduct = $this->API->getProductRow($this->session->userdata('id'));
             $totalSelling = $this->API->getSellingRow($this->session->userdata('id'));
             $user = $this->API->getJoinUser($this->session->userdata('id'));
+            $transaction = $this->API->getTransactionLimit($this->session->userdata('id',));
             $products = [];
             if (!empty($user->COMPANY_ID)) {
                 $products = $this->API->getProductDistinct($this->session->userdata('id'), $user->COMPANY_ID);
@@ -48,6 +51,8 @@ class Home extends CI_Controller {
                     $products[$i]->IMAGE = $this->API->getFirstChildById(array('PRODUCT_ID' => $products[$i]->PRODUCT_ID), 'PRODUCT_IMAGE');
                 }
             }
+            
+
             $jobs = $this->API->getJobsHome();
             $data = array(
                 'title' => "Dashboard",
@@ -55,7 +60,8 @@ class Home extends CI_Controller {
                 'total_selling' => $totalSelling,
                 'products' => $products,
                 'user' => $user,
-                'jobs' => $jobs
+                'jobs' => $jobs,
+                'transaction' => $transaction
             );
             $this->load->view('dist/index', $data);
         }
@@ -140,19 +146,22 @@ class Home extends CI_Controller {
         }
     }
 
-    public function delete_product()
+    public function delete_product($id)
     {
-        $id = $this->uri->segment(5);
-        if (empty($id)) {
-            echo json_encode(
-               array('status' => false, 'message' => 'Field id empty', 'data' => null)
-            );
-        } else {
-            $result = $this->API->delete(array('id' => $id), 'USER_PRODUCT');
-            echo json_encode(
-               array('status' => true, 'message' => 'Delete data job by id success', 'data' => $result)
-            );
-        }       
+        // $id = $this->uri->segment(5);
+        // if (empty($id)) {
+        //     echo json_encode(
+        //        array('status' => false, 'message' => 'Field id empty', 'data' => null)
+        //     );
+        // } else {
+        //     $result = $this->API->delete(array('id' => $id), 'USER_PRODUCT');
+        //     echo json_encode(
+        //        array('status' => true, 'message' => 'Delete data job by id success', 'data' => $result)
+        //     );
+        // }  
+        
+        $this->Home->delete($id);
+		redirect('product');
     }
 
     public function detail_product()
