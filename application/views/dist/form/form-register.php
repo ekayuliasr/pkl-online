@@ -194,11 +194,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <div class="col-md-12 mb-30">
                                         <label for="status">Tujuan / Orientasi</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="goal" value="Praktik Kerja Industri (Kelas 1 & 2)">
+                                            <input class="form-check-input" type="radio" name="goal" value="Praktik Kerja Industri">
                                             <label class="form-check-label" for="tujuan1"> Praktik Kerja Industri (Kelas 1 & 2) </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="goal" value="Magang Kerja (Mahasiswa)">
+                                            <input class="form-check-input" type="radio" name="goal" value="Magang Kerja">
                                             <label class="form-check-label" for="tujuan2"> Magang Kerja (Mahasiswa) </label>
                                         </div>
                                         <div class="form-check">
@@ -361,16 +361,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="<?php echo base_url(); ?>assets/landing-page/js/contact.form.js"></script>
         <!-- main js -->
         <script src="<?php echo base_url(); ?>assets/landing-page/js/main.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        <script type="text/javascript">
-      function ConfirmDialog() {
-        var x=confirm("Data Berhasil disimpan")
-        if (x) {
-          return true;
-        } else {
-          return false;
-        }
-      }
+        <script>
+            function ConfirmDialog() {
+                swal ("Registrasi Berhasil", "success")
+            }
     </script>
     </body>
 </html> 

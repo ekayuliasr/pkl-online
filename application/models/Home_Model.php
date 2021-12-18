@@ -13,9 +13,10 @@ class Home_Model extends CI_Model {
         return true;
     }
 
-    function total(){
-        $this->db->select('COUNT(*) as total');
-        $this->db->get('register');
+    function getParticipantRow(){
+
+        $query = $this->db->get('REGISTER')->num_rows();
+     
         return true;
     }
 }

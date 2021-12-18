@@ -27,7 +27,7 @@ class Register_Model extends CI_Model {
    }
 
     function total(){
-        $this->db->select('COUNT(*) as total');
+        $this->db->select('COUNT(FULLNAME) as total');
         $this->db->get('register');
         return true;
     }

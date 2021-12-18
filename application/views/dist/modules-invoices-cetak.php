@@ -1,28 +1,52 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-$this->load->view('dist/_partials/header');
-?>
-                                     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $transaction->TRANSACTION_CODE; ?></title>
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <section class="section">
-          <div class="section-header">
-            <h1><?= $transaction->TRANSACTION_ID; ?></h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item"><a href="#">Transaksi</a></div>
-              <div class="breadcrumb-item">Detail</div>
-            </div>
-          </div>
-         
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style type="text/css" media="print">
+        @page {
+            size: 105mm 148mm;
+            
+        }
+        body {
+            font-family: Ariel;
+            font-size: 12px;
+        }
+        table {
+            border: solid thin #000;
+            border-collapse: collapse;
+        }
+        td, th {
+            padding: 3 6;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #F5F5F5;
+            font-weight: bold;
+        }
+        h1 {
+            text-align: center;
+            font-size: 18px;
+            text-transform: upparcase;
+        }
+    </style>
+</head>
+<body onload="print()"> <!--print()-->
+    <div class="main-content">
+        <section class="section">        
           <div class="section-body">
             <div class="invoice">
               <div class="invoice-print">
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="invoice-title">
-                      <h3><div class="badge badge-info"><?php 
+                      <h3><div class="badge"><?php 
                                   if ($transaction->TRANSACTION_STATUS == 1) {
                                     echo 'Menunggu Pembayaran';
                                   } else if ($transaction->TRANSACTION_STATUS == 2) {
@@ -48,8 +72,7 @@ $this->load->view('dist/_partials/header');
                             <strong>Tanggal Transaksi:</strong><br>
                           <?= date("d F Y h:i:s", strtotime($transaction->TRANSACTION_DATE)); ?><br><br>
                         </address>
-                      </div>
-                      <div class="offset-md-3 col-md-3 col-6 text-md-right">
+                      
                         <address>
                           <strong>Dikirim Kepada:</strong><br>
                           <?= $transaction->TRANSACTION_NAME; ?><br>
@@ -62,16 +85,15 @@ $this->load->view('dist/_partials/header');
                 
                 <div class="row mt-4">
                   <div class="col-md-12">
-                    <div class="section-title">Order Summary</div>
-                    <p class="section-lead">All items here cannot be deleted.</p>
-                    <div class="table-responsive">
-                      <table class="table table-striped table-hover table-md">
+                    <div class="section-title"><strong>Order Summary</strong></div>
+                  
+                      <table>
                         <tr>
-                          <th data-width="40">#</th>
-                          <th>Produk</th>
-                          <th class="text-center">Harga</th>
-                          <th class="text-center">Jumlah</th>
-                          <th class="text-right">Total</th>
+                          <td data-width="40">No.</td>
+                          <td>Produk</td>
+                          <td class="text-center">Harga</td>
+                          <td class="text-center">Jumlah</td>
+                          <td class="text-right">Total</td>
                         </tr>
                         <tr>
                           <td>1</td>
@@ -81,17 +103,16 @@ $this->load->view('dist/_partials/header');
                           <td class="text-right"><?= number_format($transaction->PAYMENT_TOTAL); ?></td>
                         </tr>
                       </table>
-                    </div>
+                  
                     <div class="row mt-4">
                       <div class="col-lg-8">
                         <div class="section-title">Payment Method</div>
-                        <div class="alert alert-info">
+                        <div class="alert">
                             Anda dapat melakukan pembayaran melalui rekening berikut:<br>
                             <h6>BRI 0585-01-000755-30-4 a.n LIBMI Education Center </h6>
                             Sejumlah <b>Rp<?= number_format($transaction->PAYMENT_TOTAL); ?></b>
                         </div>
-                      </div>
-                      <div class="col-lg-4 text-right">
+                     
                         <hr class="mt-2 mb-2">
                         <div class="invoice-detail-item">
                           <div class="invoice-detail-name">Total</div>
@@ -108,54 +129,12 @@ $this->load->view('dist/_partials/header');
                   <?php if(!$this->session->userdata('admin') && $transaction->TRANSACTION_STATUS == 1): ?>
                     <button class="btn btn-primary btn-icon icon-left" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-credit-card"></i> Process Payment</button>
                   <?php elseif($this->session->userdata('admin') && $transaction->TRANSACTION_STATUS > 1): ?>
-                    <a class="btn btn-primary btn-icon icon-left" href="<?= base_url(); ?>upload/proof/<?= $transaction->PAYMENT_PROOF; ?>" target="_new"><i class="fas fa-credit-card"></i> Payment Detail</a>
                   <?php endif; ?>
                 </div>
-                <a href="<?= base_url(); ?>invoice/cetak/<?= $transaction->TRANSACTION_ID; ?>" target="_blank" class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</a>
               </div>
             </div>
           </div>
         </section>
       </div>
-
-      <div class="modal fade" tabindex="-1" role="dialog" id="confirmModal">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Konfirmasi Pembayaran</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form id="payment-method" method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label>Nama Pengirim</label>
-                    <input type="hidden" name="id" id="id" value="<?= $transaction->PAYMENT_ID; ?>">
-                    <input type="hidden" name="trans_id" id="trans_id" value="<?= $transaction->TRANSACTION_ID; ?>">
-                    <input type="text" class="form-control" name="name" id="name">
-                  </div>
-                  <div class="form-group">
-                    <label>Metode Pembayaran</label>
-                    <input type="text" class="form-control" name="jenis_pembayaran" id="jenis_pembayaran">
-                  </div>
-                  <div class="form-group">
-                    <label>Nomor Rekening Pengirim</label>
-                    <input type="text" class="form-control" name="norek" id="norek">
-                  </div>
-                  <div class="form-group">
-                    <label>Bukti Pembayaran</label>
-                    <input type="file" class="form-control" name="proof" id="proof">
-                  </div>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button type="submit" class="btn btn-primary">Konfirmasi Pembayaran</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        
-<?php $this->load->view('dist/_partials/footer'); ?>
+</body>
+</html>

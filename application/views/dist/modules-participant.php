@@ -14,7 +14,7 @@ $this->load->view('dist/_partials/header');
             </div>
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
               <div class="card card-statistic-2">
                 <div class="card-icon shadow-primary bg-primary">
@@ -30,7 +30,7 @@ $this->load->view('dist/_partials/header');
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="section-body">
             <h2 class="section-title">Daftar Peserta 
@@ -48,13 +48,13 @@ $this->load->view('dist/_partials/header');
                             <th class="text-center">
                               #
                             </th>
-                            <th>Name</th>
+                            <th>Nama</th>
                             <th>Email</th>
-                            <th>Phone</th>
+                            <th>Kontak (No. HP)</th>
                             <th>Status</th>
-                            <th>Institution</th>
-                            <th>Goals</th>
-                            <th>Schedule</th>
+                            <th>Institusi</th>
+                            <th>Tujuan</th>
+                            <th>Jadwal</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -83,7 +83,7 @@ $this->load->view('dist/_partials/header');
                                 <?= $key->GOAL ?>
                             </td>
                             <td>
-                                <?= $key->SCHEDULE ?>
+                                <?= date('d F Y', strtotime($key->SCHEDULE)); ?>
                             </td>
                             <td>
                             <!-- <?= base_url(); ?>transaction/detail/<?= $key->TRANSACTION_ID; ?> -->

@@ -44,7 +44,7 @@ class Transaction extends CI_Controller {
             $payment = array(
                 'PAYMENT_NAME' => "PAID-".strtoupper(uniqid()),
                 'PAYMENT_TOTAL' => $product->PRODUCT_PRICE * $qty,
-                'PAYMENT_METHOD' => 'BCA',
+                // 'PAYMENT_METHOD' => 'BCA',
                 'PAYMENT_PROOF' => '',
             );
 
@@ -122,14 +122,35 @@ class Transaction extends CI_Controller {
         $this->load->view('dist/modules-invoices', $data);
     }
 
+    public function cetak(){
+
+        $id = $this->uri->segment(3);
+        $transaction = $this->db->query("
+            SELECT * FROM TRANSACTION T 
+            JOIN PRODUCT P ON T.PRODUCT_ID = P.PRODUCT_ID 
+            JOIN PAYMENT PY ON T.PAYMENT_ID = PY.PAYMENT_ID
+            JOIN USER U ON T.USER_ID = U.USER_ID
+            WHERE TRANSACTION_ID = $id
+            ORDER BY T.TRANSACTION_DATE ASC")->row();
+
+       
+        $data = array(
+            'title' => $transaction->TRANSACTION_CODE,
+            'transaction' => $transaction,
+         
+        );
+        $this->load->view('dist/modules-invoices-cetak', $data);
+    }
+
     public function confirm_payment()
     {
         $id = $this->input->post('id');
         $trxId = $this->input->post('trans_id');
         $paymentName = $this->input->post('name');
         $paymentNorek = $this->input->post('norek');
+        $paymentMethod = $this->input->post('jenis_pembayaran');
 
-        if (empty($id) || empty($trxId) || empty($paymentName) || empty($paymentNorek)) {
+        if (empty($id) || empty($trxId) || empty($paymentName) || empty($paymentNorek) || empty($paymentMethod)) {
             echo json_encode(
                 array('status' => false, 'message' => 'Field empty', 'data' => null)
             );
@@ -146,6 +167,7 @@ class Transaction extends CI_Controller {
 
                 $data = array(
                     'PAYMENT_AS_NAME' => $paymentName,
+                    'PAYMENT_METHOD' => $paymentMethod,
                     'PAYMENT_NO_REK' => $paymentNorek,
                     'PAYMENT_PROOF' => $image,
                 );

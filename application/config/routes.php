@@ -66,6 +66,7 @@ $route['product/add'] = 'Home/product_add';
 
 $route['history'] = 'Transaction/history';
 $route['transaction/detail/:num'] = 'Transaction/detail';
+$route['invoice/cetak/:num'] = 'Transaction/cetak';
 $route['form-register'] = 'Form_Register';
 
 // API TRANSACTIONS

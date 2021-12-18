@@ -22,7 +22,7 @@ class Home extends CI_Controller {
                 $totalCompany = $this->API->getCompanyRow();
                 $totalProduct = $this->API->getProductRow();
                 $totalSelling = $this->API->getSellingRow();
-                $totalParticipant = $this->Home->total();
+                $totalParticipant = $this->db->get('REGISTER')->num_rows();
             } else {
                 $totalUser = $this->API->getUserRow($this->session->userdata('data')->ADMIN_INSTITUTION);
                 $totalCompany = $this->API->getCompanyRow();

@@ -106,7 +106,7 @@ $this->load->view('dist/_partials/header');
                             }
                           ?>
                         </td>
-                        <td><?= $key->TRANSACTION_DATE; ?></td>
+                        <td><?= date('d F Y', strtotime($key->TRANSACTION_DATE)); ?></td>
                         <td><a href="<?= base_url(); ?>transaction/detail/<?= $key->TRANSACTION_ID; ?>" class="btn btn-info btn-sm">Detail</a></td>
                       </tr>
                       <?php $no++; endforeach; ?>
